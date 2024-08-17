@@ -28,7 +28,7 @@
                 @csrf
                 <div class="card-body">
                     <h3 class="text-center mb-3 font-weight-medium">
-                        MASUK
+                        Login
                     </h3>
                     <div class="mb-3">
                         <label class="form-label">Email</label>

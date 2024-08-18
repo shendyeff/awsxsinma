@@ -2,7 +2,7 @@
 
 @section('content')
 <x-container>
-    <div class="col-sm-6 col-xl-3">
+    <div class="col-sm-6 col-xl-4">
         <x-widget title="Kategori" :subTitle="$categories" class="bg-azure">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24"
                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -13,7 +13,7 @@
             </svg>
         </x-widget>
     </div>
-    <div class="col-sm-6 col-xl-3">
+    <div class="col-sm-6 col-xl-4">
         <x-widget title="Supplier" :subTitle="$suppliers" class="bg-primary">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-truck" width="24" height="24"
                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -25,7 +25,7 @@
             </svg>
         </x-widget>
     </div>
-    <div class="col-sm-6 col-xl-3">
+    <div class="col-sm-6 col-xl-4">
         <x-widget title="Barang" :subTitle="$products" class="bg-indigo">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-truck-loading" width="24"
                 height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -38,21 +38,8 @@
             </svg>
         </x-widget>
     </div>
-    <!-- <div class="col-sm-6 col-xl-3">
-            <x-widget title="Kendaraan" :subTitle="$vehicles" class="bg-purple">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-steering-wheel" width="24"
-                    height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <circle cx="12" cy="12" r="9"></circle>
-                    <circle cx="12" cy="12" r="2"></circle>
-                    <line x1="12" y1="14" x2="12" y2="21"></line>
-                    <line x1="10" y1="12" x2="3.25" y2="10"></line>
-                    <line x1="14" y1="12" x2="20.75" y2="10"></line>
-                </svg>
-            </x-widget>
-        </div> -->
-    <div class="col-sm-6 col-xl-3">
+
+    <div class="col-sm-6 col-xl-4">
         <x-widget title="Customer" :subTitle="$customers" class="bg-lime">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users" width="24" height="24"
                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -65,7 +52,7 @@
             </svg>
         </x-widget>
     </div>
-    <div class="col-sm-6 col-xl-3">
+    <!-- <div class="col-sm-6 col-xl-3">
         <x-widget title="Permintaan Barang" :subTitle="0" class="bg-green">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart-plus" width="24"
                 height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -78,8 +65,8 @@
                 <path d="M15 6h6m-3 -3v6"></path>
             </svg>
         </x-widget>
-    </div>
-    <div class="col-sm-6 col-xl-3">
+    </div> -->
+    <div class="col-sm-6 col-xl-4">
         <x-widget title="Barang Keluar" :subTitle="$transactions" class="bg-cyan">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart-x" width="24"
                 height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -94,7 +81,7 @@
             </svg>
         </x-widget>
     </div>
-    <div class="col-sm-6 col-xl-3">
+    <div class="col-sm-6 col-xl-4">
         <x-widget title="Barang Keluar Bulan ini" :subTitle="$transactionThisMonth" class="bg-teal">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart-off" width="24"
                 height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -108,7 +95,7 @@
             </svg>
         </x-widget>
     </div>
-    <div class="col-12">
+    <!-- <div class="col-12">
         @if ($orders->count() == 0)
         <div class="alert alert-info d-flex align-items-center" role="alert">
             <i class="fas fa-info-circle mr-2 fa-lg"></i>
@@ -120,32 +107,35 @@
             Saat ini terdapat {{ $orders->count() }} permintaan barang menunggu konfirmasi.
             <a href="" class="ml-1">Lihat Detail Permintaan</a>
         </div>
-        @endif
+        @endif -->
     </div>
-    <div class="col-12 col-lg-6">
-        <x-card title="List Barang dengan stok kurang dari 10">
-            <div class="list list-row list-hoverable">
-                @foreach ($productsOutStock as $product)
-                <div class="list-item">
-                    <div>
-                        <span class="badge bg-danger">{{ $product->quantity }}</span>
+    <div class="row">
+        <div class="col-12 col-lg-6">
+            <x-card title="Chart Barang paling populer">
+                <div id="chart-total-sales" class="my-3"></div>
+            </x-card>
+        </div>
+        <div class="col-12 col-lg-6">
+            <x-card title="List Barang dengan stok kurang dari 10">
+                <div class="list list-row list-hoverable">
+                    @foreach ($productsOutStock as $product)
+                    <div class="list-item">
+                        <div>
+                            <span class="badge bg-danger">{{ $product->quantity }}</span>
+                        </div>
+                        <div class="text-truncate">
+                            <a href="{{ route('admin.stock.index') }}"
+                                class="text-body d-block">{{ $product->name }}</a>
+                            <small class="d-block text-muted mt-n1">
+                                Kategori : {{ $product->category->name }}
+                            </small>
+                        </div>
                     </div>
-                    <div class="text-truncate">
-                        <a href="{{ route('admin.stock.index') }}" class="text-body d-block">{{ $product->name }}</a>
-                        <small class="d-block text-muted  mt-n1">
-                            Kategori : {{ $product->category->name }}
-                        </small>
-                    </div>
+                    @endforeach
                 </div>
-                @endforeach
-            </div>
-        </x-card>
-        <div class="d-flex justify-content-end">{{ $productsOutStock->links() }}</div>
-    </div>
-    <div class="col-lg-6">
-        <x-card title="Chart Barang paling populer">
-            <div id="chart-total-sales" class="my-3"></div>
-        </x-card>
+            </x-card>
+            <div class="d-flex justify-content-end">{{ $productsOutStock->links() }}</div>
+        </div>
     </div>
 </x-container>
 @endsection

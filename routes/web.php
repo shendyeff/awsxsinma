@@ -111,7 +111,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
         Route::get('/setting', 'index')->name('setting.index');
         Route::put('/setting/update/{user}', 'update')->name('setting.update');
     });
-});
+});;
+
+Route::get('/transactions/pdf', [TransactionController::class, 'exportPDF'])->name('transactions.pdf');
 
 Route::group(['prefix' => 'customer', 'as' => 'customer.', 'middleware' => ['auth', 'role:Customer']], function () {
     Route::get('/dashboard', CustomerDashboardController::class)->name('dashboard');

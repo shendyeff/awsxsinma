@@ -4,8 +4,9 @@
 <x-container>
     <div class="col-12">
         <x-card title="DAFTAR BARANG KELUAR" class="card-body p-0">
-            <a href="{{ route('transactions.pdf') }}" class="btn btn-primary">Cetak PDF</a>
-
+            <div class="d-flex justify-content-end mb-3">
+                <a href="{{ route('report-daftarBarangKeluar.pdf') }}" class="btn btn-primary">Cetak PDF</a>
+            </div>
             <x-table>
                 <thead>
                     <tr>

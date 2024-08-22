@@ -6,12 +6,12 @@
                     Sinma Official
                 </h1>
                 <p class="text-sm md:text-lg text-center md:text-start text-gray-300">
-                    Gudangku membantu memberikan informasi barang digudang secara menyeluruh dan lengkap serta
-                    permintaan barang dapat dilakukan dimana saja.
+                    Temukan solusi bisnis digital kamu bersama SINMA! <br>
+                    Kemudahan menjalankan bisnis digital dengan cepat, mudah, dan praktis. Ayo mulai bersama kami!
                 </p>
             </div>
             <div class="hidden md:flex md:col-span-5">
-                <img src="{{ asset('gudang.svg') }}" class="w-full" />
+                <img src="{{ asset('sinma.svg') }}" class="w-full" />
             </div>
         </div>
     </div>

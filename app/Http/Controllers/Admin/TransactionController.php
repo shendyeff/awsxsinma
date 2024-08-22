@@ -42,6 +42,6 @@ class TransactionController extends Controller
 
         $pdf = PDF::loadView('admin.transaction.pdf', compact('transactions', 'grandQuantity'));
 
-        return $pdf->download('transactions.pdf');
+        return $pdf->download('report-daftarBarangKeluar.pdf');
     }
 }

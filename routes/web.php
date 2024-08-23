@@ -113,6 +113,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
     });
 });;
 
+# Print PDF
+Route::get('/admin/report/pdf', [ReportController::class, 'exportPDF'])->name('admin.report.pdf');
 Route::get('/transactions/pdf', [TransactionController::class, 'exportPDF'])->name('report-daftarBarangKeluar.pdf');
 
 Route::group(['prefix' => 'customer', 'as' => 'customer.', 'middleware' => ['auth', 'role:Customer']], function () {

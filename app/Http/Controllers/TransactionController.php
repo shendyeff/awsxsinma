@@ -9,7 +9,6 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\TransactionDetail;
 use Illuminate\Support\Facades\Auth;
-use PDF;
 
 class TransactionController extends Controller
 {
@@ -18,11 +17,11 @@ class TransactionController extends Controller
         $length = 8;
         $random = '';
 
-        for ($i = 0; $i < $length; $i++) {
-            $random .= rand(0, 1) ? rand(0, 9) : chr(rand(ord('a'), ord('z')));
+        for($i = 0; $i < $length; $i++){
+            $random .= rand(0,1) ? rand(0,9) : chr(rand(ord('a'), ord('z')));
         }
 
-        $invoice = 'INV-' . Str::upper($random);
+        $invoice = 'INV-'.Str::upper($random);
 
         $transaction = Transaction::create([
             'invoice' => $invoice,
@@ -31,7 +30,7 @@ class TransactionController extends Controller
 
         $carts = Cart::where('user_id', Auth::id())->get();
 
-        foreach ($carts as $cart) {
+        foreach($carts as $cart){
             TransactionDetail::create([
                 'transaction_id' => $transaction->id,
                 'product_id' => $cart->product_id,
@@ -43,17 +42,5 @@ class TransactionController extends Controller
         Cart::where('user_id', Auth::id())->delete();
 
         return redirect(route('landing'))->with('toast_success', 'Terimakasih pesanan anda akan segera di proses');
-    }
-
-    public function exportPDF()
-    {
-        $transactions = Transaction::with('details.product.category', 'user')->get();
-        $grandQuantity = $transactions->sum(function ($transaction) {
-            return $transaction->details->sum('quantity');
-        });
-
-        $pdf = PDF::loadView('transactions.pdf', compact('transactions', 'grandQuantity'));
-
-        return $pdf->download('transactions.pdf');
     }
 }

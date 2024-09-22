@@ -13,7 +13,7 @@ class Input extends Component
      *
      * @return void
      */
-    public function __construct($title, $name, $type, $placeholder, $value)
+    public function __construct($title, $name, $type, $placeholder = '', $value = null)
     {
         $this->title = $title;
         $this->name = $name;
@@ -21,6 +21,7 @@ class Input extends Component
         $this->placeholder = $placeholder;
         $this->value = $value;
     }
+    
 
     /**
      * Get the view / contents that represent the component.

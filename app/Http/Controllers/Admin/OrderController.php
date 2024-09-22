@@ -10,6 +10,8 @@ use App\Traits\HasImage;
 use App\Enums\OrderStatus;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+
 
 class OrderController extends Controller
 {
@@ -82,13 +84,18 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
+        $request->validate([
+            'confirmation_code' => 'required|string',
+        ]);
+    
         $image = $this->uploadImage($request, $path = 'public/products/', $name = 'image');
-
-        if($order->status == OrderStatus::Pending){
+    
+        if ($order->status == OrderStatus::Pending) {
             $order->update([
                 'status' => OrderStatus::Verified,
+                'confirmation_code' => $request->confirmation_code, // Update kode konfirmasi
             ]);
-        }else{
+        } else {
             Product::create([
                 'category_id' => $request->category_id,
                 'supplier_id' => $request->supplier_id,
@@ -96,16 +103,18 @@ class OrderController extends Controller
                 'image' => $image->hashName(),
                 'unit' => $request->unit,
                 'description' => $request->description,
-                'quantity' => $request->quantity
+                'quantity' => $request->quantity,
             ]);
-
+    
             $order->update([
-                'status' => OrderStatus::Success
+                'status' => OrderStatus::Success,
             ]);
         }
-
+    
         return back()->with('toast_success', 'Permintaan Barang Berhasil Dikonfirmasi');
     }
+
+    
 
     /**
      * Remove the specified resource from storage.

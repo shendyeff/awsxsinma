@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use App\Enums\OrderStatus;
 
 class OrderController extends Controller
 {
@@ -38,19 +40,23 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $image = $this->uploadImage($request, $path = 'public/orders/', $name = 'image');
+{
+    // Generate kode konfirmasi
+    $confirmationCode = Str::random(6); // Misalnya 6 karakter acak
 
-        Order::create([
-            'user_id' => Auth::id(),
-            'name' => $request->name,
-            'quantity' => $request->quantity,
-            'image' => $image->hashName(),
-            'unit' => $request->unit,
-        ]);
+    // Simpan permintaan barang dari customer dengan kode konfirmasi
+    Order::create([
+        'user_id' => auth()->id(),
+        'name' => $request->name,
+        'quantity' => $request->quantity,
+        'unit' => $request->unit,
+        'image' => $this->uploadImage($request, 'public/orders/', 'image')->hashName(),
+        'status' => OrderStatus::Pending,
+        'confirmation_code' => $confirmationCode,
+    ]);
 
-        return back()->with('toast_success', 'Permintaan Barang Berhasil Diajukan');
-    }
+    return back()->with('toast_success', 'Permintaan Barang Berhasil Dibuat. Kode Konfirmasi: ' . $confirmationCode);
+}
 
     /**
      * Update the specified resource in storage.

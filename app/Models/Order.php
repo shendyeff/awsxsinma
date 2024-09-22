@@ -28,4 +28,7 @@ class Order extends Model
             get: fn($image) => asset('storage/orders/' . $image),
         );
     }
+
+    protected $fillable = ['confirmation_code', 'name', 'quantity', 'status', 'image', 'unit', 'user_id'];
+
 }

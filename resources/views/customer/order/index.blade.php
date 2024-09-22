@@ -13,6 +13,7 @@
                         <th>Kuantitas</th>
                         <th>Satuan</th>
                         <th>Status</th>
+                        <th>Kode Konfirmasi</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -31,6 +32,7 @@
                             class="{{ $order->status == App\Enums\OrderStatus::Pending ? 'text-danger' : 'text-success' }}">
                             {{ $order->status->value }}
                         </td>
+                        <td>{{ $order->confirmation_code }}</td>
                         <td>
                             @if ($order->status == App\Enums\OrderStatus::Pending)
                             <x-button-modal :id="$order->id" title="" icon="edit" style=""

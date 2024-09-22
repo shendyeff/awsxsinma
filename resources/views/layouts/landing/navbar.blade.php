@@ -3,8 +3,8 @@
     <div class="container mx-auto">
         <div class="flex justify-between items-center">
             <a href="/" class="flex items-center gap-2">
-                <img src="{{ asset('warehouse.png') }}" class="w-7 h-7 object-center object-cover" />
-                <h1 class="text-white text-2xl font-semibold">Gudangku</h1>
+                <img src="{{ asset('sinmaputih.png') }}" class="w-50 h-7 object-center object-cover" />
+                <h1 class="text-white text-2xl font-semibold"></h1>
             </a>
             <div class="flex gap-4 text-white">
                 @guest

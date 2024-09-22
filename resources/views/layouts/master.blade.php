@@ -65,49 +65,49 @@
     <!-- SweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
-        function deleteData(id) {
-            const swalWithBootstrapButtons = Swal.mixin({
-                customClass: {
-                    confirmButton: 'btn btn-success',
-                    cancelButton: 'btn btn-danger'
-                },
-                buttonsStyling: true
-            })
+    function deleteData(id) {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: true
+        })
 
-            swalWithBootstrapButtons.fire({
-                title: 'Apakah kamu yakin ingin menghapus data ini?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Ya, Tolong Hapus!',
-                cancelButtonText: 'Tidak!',
-                reverseButtons: true
-            }).then((result) => {
-                if (result.value) {
-                    event.preventDefault();
-                    document.getElementById('delete-form-' + id).submit();
+        swalWithBootstrapButtons.fire({
+            title: 'Apakah kamu yakin ingin menghapus data ini?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, Tolong Hapus!',
+            cancelButtonText: 'Tidak!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+                event.preventDefault();
+                document.getElementById('delete-form-' + id).submit();
 
-                } else if (
-                    /* Read more about handling dismissals below */
-                    result.dismiss === Swal.DismissReason.cancel
-                ) {
-                    swalWithBootstrapButtons.fire(
-                        'Data kamu tetap aman !',
-                        '',
-                        'error'
-                    )
-                }
-            })
-        }
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'Data kamu tetap aman !',
+                    '',
+                    'error'
+                )
+            }
+        })
+    }
     </script>
 
     <!-- Advance tag select -->
     <script>
-        $(document).ready(function() {
-            $('#select-tags-advanced').selectize({
-                maxItems: 15,
-                plugins: ['remove_button'],
-            });
+    $(document).ready(function() {
+        $('#select-tags-advanced').selectize({
+            maxItems: 15,
+            plugins: ['remove_button'],
         });
+    });
     </script>
     @stack('js')
 </body>

@@ -10,7 +10,7 @@
                     <div class="flex flex-col">
                         <h1 class="text-gray-700 font-bold text-lg">Daftar Barang</h1>
                         <p class="text-gray-400 text-xs">
-                            Kumpulan data barang yang berada di gudang
+                            Kumpulan data barang yang berada di Sinma Official
                         </p>
                     </div>
                     <form action="{{ route('product.index') }}" method="get">
@@ -75,7 +75,7 @@
                 <div class="md:shadow-custom md:bg-white md:rounded-lg md:border">
                     <div class="flex flex-col p-4">
                         <h1 class="text-gray-700 font-bold text-lg">Daftar Kategori</h1>
-                        <p class="text-gray-400 text-xs">Kumpulan data kategori yang berada di gudang</p>
+                        <p class="text-gray-400 text-xs">Kumpulan data kategori yang berada di Sinma Official</p>
                     </div>
                     <div class="p-4 flex flex-row gap-8 overflow-x-auto md:grid md:gird-cols-1 md:gap-2">
                         @foreach ($categories as $category)

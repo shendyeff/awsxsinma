@@ -18,10 +18,10 @@ class ProductController extends Controller
     {
         $search = $request->search;
 
-        $products = Product::with('category', 'supplier')->when($search, function($query) use($search){
-            $query = $query->where('name', 'like', '%'.$search.'%');
-        })->orWhereHas('category', function($query) use($search){
-            $query = $query->where('name', 'like', '%'.$search.'%');
+        $products = Product::with('category', 'supplier')->when($search, function ($query) use ($search) {
+            $query = $query->where('name', 'like', '%' . $search . '%');
+        })->orWhereHas('category', function ($query) use ($search) {
+            $query = $query->where('name', 'like', '%' . $search . '%');
         })->get();
 
         return view('landing.product.index', compact('products', 'search'));
@@ -37,7 +37,7 @@ class ProductController extends Controller
     {
         $product = Product::with('category')->where('slug', $slug)->first();
 
-        $products = $product->where('category_id', $product->category_id)->where('id', '!=',$product->id)->limit(5)->inRandomOrder()->get();
+        $products = $product->where('category_id', $product->category_id)->where('id', '!=', $product->id)->limit(5)->inRandomOrder()->get();
 
         $transaction = TransactionDetail::with('transaction', 'product')->where('product_id', $product->id)->get();
 

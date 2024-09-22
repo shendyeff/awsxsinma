@@ -40,7 +40,10 @@ class DashboardController extends Controller
 
         $productsOutStock = Product::where('quantity', '<=', 10)->paginate(5);
 
+        // $orders = Order::count();
         $orders = Order::where('status', 0)->get();
+        // dd($orders); // Menampilkan data yang diambil untuk debugging
+
 
         $bestProduct = DB::table('transaction_details')
             ->addSelect(DB::raw('products.name as name, sum(transaction_details.quantity) as total'))

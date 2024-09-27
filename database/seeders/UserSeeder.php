@@ -18,19 +18,13 @@ class UserSeeder extends Seeder
     {
         $role = Role::where('name', 'Super Admin')->first();
 
-        // Cek apakah pengguna dengan email admin@gmail.com sudah ada
-        $user = User::updateOrCreate(
-            ['email' => 'sinmaofficial@gmail.com'],  // Kondisi pencarian
-            [   // Data yang akan diupdate atau dibuat
-                'name' => 'Admin',
-                'password' => bcrypt('password'),
-                'department' => 'HRD'
-            ]
-        );
+        $user = User::create([
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('password'),
+            'department' => 'Umum'
+        ]);
 
-        // Assign peran jika belum terassign
-        if (!$user->hasRole($role)) {
-            $user->assignRole($role);
-        }
+        $user->assignRole($role);
     }
 }

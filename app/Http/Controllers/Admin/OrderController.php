@@ -84,18 +84,24 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        $request->validate([
-            'confirmation_code' => 'required|string',
-        ]);
-    
-        $image = $this->uploadImage($request, $path = 'public/products/', $name = 'image');
-    
+        // Jika status masih Pending, lakukan konfirmasi dengan kode
         if ($order->status == OrderStatus::Pending) {
-            $order->update([
-                'status' => OrderStatus::Verified,
-                'confirmation_code' => $request->confirmation_code, // Update kode konfirmasi
-            ]);
-        } else {
+            // Periksa apakah kode konfirmasi sesuai
+            if ($request->confirmation_code == $order->confirmation_code) {
+                // Ubah status menjadi Verified
+                $order->update([
+                    'status' => OrderStatus::Verified,
+                ]);
+                
+                return back()->with('toast_success', 'Permintaan Barang Berhasil Dikonfirmasi');
+            } else {
+                return back()->with('toast_error', 'Kode Konfirmasi Tidak Sesuai');
+            }
+        }
+    
+        // Jika status sudah Verified, tambahkan produk tanpa memeriksa kode lagi
+        if ($order->status == OrderStatus::Verified) {
+            $image = $this->uploadImage($request, $path = 'public/products/', $name = 'image');
             Product::create([
                 'category_id' => $request->category_id,
                 'supplier_id' => $request->supplier_id,
@@ -106,13 +112,18 @@ class OrderController extends Controller
                 'quantity' => $request->quantity,
             ]);
     
+            // Ubah status menjadi Success setelah produk ditambahkan
             $order->update([
                 'status' => OrderStatus::Success,
             ]);
+    
+            return back()->with('toast_success', 'Produk berhasil ditambahkan');
         }
     
-        return back()->with('toast_success', 'Permintaan Barang Berhasil Dikonfirmasi');
+        // Jika status selain Pending atau Verified, tidak lakukan apa-apa
+        return back()->with('toast_error', 'Permintaan tidak valid.');
     }
+    
 
     
 
